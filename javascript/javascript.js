@@ -7,12 +7,12 @@ let roundNumber = 0;
 //code to generate computers choice//
 
 function computerPlay() {
-    let computerNumber = Math.floor(Math.random()*3);
     let computerOptions = ['rock','paper','scissors'];
+    let computerNumber = Math.floor(Math.random()*3);
     return computerOptions[computerNumber];
 }
 
-//code for playing a round//
+//code for playing a single round//
 
 function playRound() {
 
@@ -31,7 +31,8 @@ function playRound() {
             (playerChoice === 'paper' && computerChoice === 'rock')) {
                 playerScore++;
                 roundNumber++;
-                alert(`You win! ${playerChoice} beats ${computerChoice}.`);
+                alert(`The computer picked ${computerChoice}`);
+                alert(`${playerChoice} beats ${computerChoice}. You win!`);
                 alert(`Your score is ${playerScore} and the computers score is ${computerScore}.`);
             }
 
@@ -41,15 +42,17 @@ function playRound() {
             (computerChoice === 'paper' && playerChoice === 'rock')) {
                 computerScore++;
                 roundNumber++;
-                alert(`You lose! ${computerChoice} beats ${playerChoice}.`);
+                alert(`The computer picked ${computerChoice}`);
+                alert(`${computerChoice} beats ${playerChoice}. You lose!`);
                 alert(`Your score is ${playerScore} and the computers score is ${computerScore}.`);
                 
             }
         else {
-            alert("error.")
+            alert("Error, something went wrong.")
         }
 };
 
+//code to determining which message is displayed upon victory/defeat//
 function endgame() {
     if (playerScore > computerScore) {
         alert("You reached 5 points first. You win!")
@@ -58,6 +61,20 @@ function endgame() {
         alert("The computer reached 5 points first. You lose...")
     }
     else {
-        alert("error.")
+        alert("Error, something went wrong.")
     }
 }
+
+//code for a full multi round game//
+
+function game() {
+    console.log(playRound());
+    if (playerScore < 5 && computerScore < 5) {
+        game();
+    }
+    else {
+        endgame();
+    }
+}
+
+game();
